@@ -1,31 +1,36 @@
 {
   "manifest_version": 3,
-  "name": "Block Third-Party Resources",
-  "version": "1.0",
+  "name": "3p-Block",
+  "version": "1.0.0.2",
   "description": "Blocks all third-party scripts, images, frames, and fonts.",
   "permissions": [
-    "declarativeNetRequest", 
-    "declarativeNetRequestWithHostAccess", 
     "webRequest", 
     "webRequestBlocking",
     "storage"
   ],
   "host_permissions": [
-    "*://*/*"
+    "<all_urls>"
   ],
-   "background": {
+  "background": {
     "scripts": [
       "background.js"
     ],
     "type": "module"
   },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "run_at": "document_end"
+    }
+  ],
   "action": {
     "default_icon": "icons/icon.png"
   },
   "browser_specific_settings": {
     "gecko": {
       "id": "block3rdparty@nan.com",
-      "strict_min_version": "70.0"
+      "strict_min_version": "109.0"
     }
   }
 }
